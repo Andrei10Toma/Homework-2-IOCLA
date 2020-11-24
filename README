@@ -1,0 +1,46 @@
+Toma Andrei 321CB
+Tema 2 IOCLA
+_______________________________________________________________________________
+
+otp - extrag pe rand cate un caracter din plaintext si unul din key dupa care
+efectuez operatia xor pe caracterele extrase si rezultatul il pun in edx.
+_______________________________________________________________________________
+
+caesar - extrag pe rand cate un caracter din plaintext si dupa aceea voi
+verifica daca a fost extrasa o litera din string. Daca ce am extras nu este o
+litera atunci pur si simplu caracterul va fi adaugat in edx (ciphertext).
+Altfel daca a fost gasita litera mare sau mica se va adauga la ebx valoarea
+stocata in eax (caracterul extras din plaintext) si dupa aceea valoarea stocata
+in edi (cheia). Daca depaseste 'z' sau 'Z' se vor efectua operatii de rotatii
+pana cand nu se va mai depasi 'z' sau 'Z'. Dupa ce nu mai depaseste unul din
+cele 2 caractere vom adauga litera in cyphertext.
+_______________________________________________________________________________
+
+vigenere - se extrage pe rand fiecare caracter din plaintext si din cheie
+si dupa aceea voi verifica daca a fost extrasa o litera din plain. In cazul 
+in care caracterul extras nu este litera se va adauga in cyphertext, iar
+indexul pentru cheie va ramane acelasi. Daca este extrasa o litea atunci se
+va afla pozitia literei din cheie in alfabet si se va adauga la eax (unde este
+gasita litera extrasa din plain). Daca depaseste 'z' sau 'Z' se vor face
+rotatii similare ca la caesar. Dupa ce rotatiile au fost facute se adauga
+caracterul in cyphertext si se trece la urmatorul caracter din plain si din
+cheie. Cand indexul cheii devine egal cu lungimea cheii se va reseta indexul.
+_______________________________________________________________________________
+
+strstr - se extrage fiecare caracter din stringul dat si primul caracter
+din substring. Cand se extrage un caracter din string care este egal cu primul
+caracter din substring se intra intr-un loop care verifica daca se afla intreg
+substringul in string. Daca se parcurge tot substringul pana la final inseamna
+ca a fost gasit intreg sunstringul in string. Daca a fost gasit un caracter
+care sa difere de caracterul extras din string atunci se va reseta edi (indexul
+de unde incepe substringul in string) si ecx (indexul pentru stringul dat) se
+va pune valoarea care era in registru inainte sa se intre in loop. Daca a fost
+parcurs intreg sirul inseamna ca nu a fost gasit substringul si se va returna
+lungimea stringului original + 1.
+_______________________________________________________________________________
+
+bintohex - mai intai se determina lungimea pe care o va avea cuvantul scris
+in hexa. Se vor extrage pe rand grupuri de cate 4 biti si acestia vor fi
+convertiti la hexa si se va face append in edx la fiecare conversie in hexa a
+celor 4 biti. In cazul in care lungimea sirului binar nu este multiplu de 4
+se va iesi mai repede din loop.

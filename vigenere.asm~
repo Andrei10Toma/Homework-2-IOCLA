@@ -1,0 +1,52 @@
+%include "io.mac"
+
+section .bss
+	plaintext_len: resd 1
+	key_len: resd 1
+
+section .text
+    global vigenere
+    extern printf
+
+vigenere:
+    ;; DO NOT MODIFY
+    push    ebp
+    mov     ebp, esp
+    pusha
+
+    mov     edx, [ebp + 8]      ; ciphertext
+    mov     esi, [ebp + 12]     ; plaintext
+    mov     ecx, [ebp + 16]     ; plaintext_len
+    mov     edi, [ebp + 20]     ; key
+    mov     ebx, [ebp + 24]     ; key_len
+    ;; DO NOT MODIFY
+	
+    ;; TODO: Implement the Vigenere cipher
+
+	mov [plaintext_len], ecx
+	mov [key_len], ebx
+criptare:
+	;; TODO: Incercare implementare fara a crea cheia extinsa (algoritm similar caesar)
+	mov al, byte[esi +  ecx - 1]
+	cmp al, 'A'
+	jl non_char
+	cmp al, 'Z'
+	jle found
+	loop criptare
+;	xor eax, eax
+;	xor ecx, ecx
+	;; do while 
+;;prelungire_cheie:
+;	mov cl, [edi + eax]
+;	mov byte[edi + ebx], cl
+;	inc ebx
+;	inc eax
+;	cmp ebx, [plaintext_len]
+;	jl prelungire_cheie 
+	;; End Vigenere Cipher
+
+    ;; DO NOT MODIFY
+    popa
+    leave
+    ret
+    ;; DO NOT MODIFY

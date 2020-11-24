@@ -1,0 +1,65 @@
+%include "io.mac"
+
+section .bss
+	plaintext_len: resd 1
+	key_len: resd 1
+
+section .text
+    global vigenere
+    extern printf
+
+vigenere:
+    ;; DO NOT MODIFY
+    push    ebp
+    mov     ebp, esp
+    pusha
+
+    mov     edx, [ebp + 8]      ; ciphertext
+    mov     esi, [ebp + 12]     ; plaintext
+    mov     ecx, [ebp + 16]     ; plaintext_len
+    mov     edi, [ebp + 20]     ; key
+    mov     ebx, [ebp + 24]     ; key_len
+    ;; DO NOT MODIFY
+	
+    ;; TODO: Implement the Vigenere cipher
+
+	mov [plaintext_len], ecx
+	mov [key_len], ebx
+	;; TODO: implementare folosind while pentru parcurgerea plaintext
+	xor ecx, ecx
+	xor eax, eax
+	xor ebx, ebx
+criptare:
+	cmp ebx, [key_len]
+	jge actualizare_ebx
+back:
+	mov al, byte[esi + ecx]
+	mov ah, byte[edi + ebx]
+	cmp al, 'A'
+	jl non_char
+	cmp al, 'Z'
+	jle found
+	cmp al, 'a'
+	jl non_char
+	cmp al, 'z'
+	jg non_char
+	;;TODO gasit litera mica
+	jmp end
+found: ;; TODO: gasit litera mare
+	jmp end
+non_char:
+	mov byte[edx + ecx], al
+end:
+	inc ebx
+	inc ecx
+	cmp ecx, [plaintext_len]
+	jle criptare
+	;; End Vigenere Cipher
+    ;; DO NOT MODIFY
+    popa
+    leave
+    ret
+actualizare_ebx:
+	xor ebx, ebx
+	jmp back
+    ;; DO NOT MODIFY
